@@ -19,6 +19,8 @@ library(ggflags)
 library(CoordinateCleaner)
 
 
+# Find the path to store results in config
+folder_results<-"C:/Victor_local"
 
 
 ### Call hidden functions (e.g. to store results, to clean names...)
