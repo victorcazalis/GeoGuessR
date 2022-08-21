@@ -14,7 +14,7 @@ GGR_Store_results<-function(GAME, QUESTION, ANSWER, CORRECT){
   }
   
   ### Add the results from this game
-  results[nrow(results)+1,]<-c(GAME, as.character(Sys.Date()), QUESTION, ANSWER, CORRECT)
+  results[nrow(results)+1,]<-c(GAME, as.character(Sys.Date()), QUESTION, ANSWER, CORRECT, NA)
 
   ### Save the file
   write.csv(results[is.na(results$Game)==F,], paste0(folder_results, "/Your_GeoGuessR_results.csv"), row.names=F)

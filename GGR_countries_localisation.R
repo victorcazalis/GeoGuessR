@@ -1,12 +1,11 @@
 
 
-GGR_countries_localisation<-function(){
+GGR_countries_localisation<-function(Size_Min){
   
   
   ### Prepare countries data frame
   countries<-read_sf("Data/Countries_simplified_GeoGuessR.shp")
-  countries$AREA_M2<-st_area(countries) %>% as.numeric()
-  countries<-subset(countries, countries$AREA_M2>10^10) # Remove the small countries (not visible on the map)
+  countries<-subset(countries, countries$AREA_M2>Size_Min*1000000) # Remove the small countries (not visible on the map)
   
   ### Prepare the question
   RAND<-sample(x=(1:nrow(countries)), size=1) %>% as.numeric()

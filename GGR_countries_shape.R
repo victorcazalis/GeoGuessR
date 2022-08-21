@@ -1,9 +1,10 @@
 
-GGR_countries_shape<-function(){
+GGR_countries_shape<-function(Size_Min){
   
   
   ### Prepare countries data frame
   countries<-read_sf("Data/Admin_dissolved_by_country_Simplif_0.005.shp")
+  countries<-subset(countries, countries$AREA_M2>Size_Min*1000000) # Remove the small countries (not visible on the map)
   
   ### Prepare the question
   RAND<-sample(x=(1:nrow(countries)), size=1) %>% as.numeric()

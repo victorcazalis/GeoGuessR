@@ -43,12 +43,12 @@ source("GGR_plot_results.R")
 # Either call one of these functions to play a specific game
 GGR_flags()
 GGR_capitals()
-GGR_countries_shape()
-GGR_countries_localisation()
+GGR_countries_shape(Size_Min=1000)
+GGR_countries_localisation(Size_Min=1000)
 
 
 # Or call this function to play all games (or select the ones you want to play)
-GGR_RandomGame(GAMES=c("flags", "capitals", "countries_shape", "countries_localisation"))
+GGR_RandomGame(GAMES=c("flags", "capitals", "countries_shape", "countries_localisation"), MinSize_Loc=1000, MinSize_Shape=1000)
 
 # Check your results
 GGR_plot_results()
