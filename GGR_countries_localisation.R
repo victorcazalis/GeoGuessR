@@ -4,7 +4,7 @@ GGR_countries_localisation<-function(){
   
   
   ### Prepare countries data frame
-  countries<-read_sf("Countries_map/Countries_simplified_GeoGuessR.shp")
+  countries<-read_sf("Data/Countries_simplified_GeoGuessR.shp")
   countries$AREA_M2<-st_area(countries) %>% as.numeric()
   countries<-subset(countries, countries$AREA_M2>10^10) # Remove the small countries (not visible on the map)
   

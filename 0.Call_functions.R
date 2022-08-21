@@ -15,9 +15,6 @@ library(gridExtra)
 #install_github("baptiste/ggflags")
 library(ggflags)
 
-#install.packages("CoordinateCleaner")
-library(CoordinateCleaner)
-
 
 # Find the path to store results in config
 folder_results<-"C:/Victor_local"

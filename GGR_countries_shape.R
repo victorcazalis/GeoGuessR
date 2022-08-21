@@ -3,7 +3,7 @@ GGR_countries_shape<-function(){
   
   
   ### Prepare countries data frame
-  countries<-read_sf("Countries_map/Admin_dissolved_by_country_Simplif_0.005.shp")
+  countries<-read_sf("Data/Admin_dissolved_by_country_Simplif_0.005.shp")
   
   ### Prepare the question
   RAND<-sample(x=(1:nrow(countries)), size=1) %>% as.numeric()

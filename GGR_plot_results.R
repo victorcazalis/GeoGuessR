@@ -2,16 +2,16 @@
 GGR_plot_results<-function(){
   
   ### Charge data
-  res<-read.csv("Your_GeoGuessR_results.csv")
+  res<-read.csv(paste0(folder_results, "/Your_GeoGuessR_results.csv"))
   res$Game<-factor(res$Game, c("Flags", "Capitals", "Countries localisation", "Countries shape"))
   
   
-  ### Attribute regions
-  countries<-read_sf("Countries_map/Countries_simplified_GeoGuessR.shp")
+  ### Attribute regions (only for those not attributed before)
+  countries<-read_sf("Data/Countries_simplified_GeoGuessR.shp")
   # For localisation and shape
-  res$Region<-countries$FIRST_NA3_[match(res$Question, countries$FIRST_NA2_)]
+  res$Region[is.na(res$Region)]<-countries$FIRST_NA3_[match(res$Question[is.na(res$Region)], countries$FIRST_NA2_)]
   cat(as.numeric(table(is.na(res$Region))["TRUE"]), "/", nrow(res), " results were not categorised in a region")
-  
+  write.csv(res, paste0(folder_results, "/Your_GeoGuessR_results.csv"), row.names=F)
   
   ### Plot proportion of good answer per game
   res_table<-as.data.frame(prop.table(table(res$Correct, res$Game),2)) %>% subset(., .$Var1=="Yes")

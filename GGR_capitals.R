@@ -4,17 +4,19 @@ GGR_capitals<-function(){
 
   
 ### Prepare capital data frame
-capitals<-as.data.frame(countryref) %>% subset(., is.na(.$capital)==F, select=c("name", "capital")) %>% distinct(., capital, .keep_all=T) 
+capitals<-read.csv("Data/Capitals_table.csv")
+capitals$name<-as.factor(capitals$name)
 
 ### Prepare the question
 RAND<-sample(x=(1:nrow(capitals)), size=1) %>% as.numeric()
+Country_Sel<-levels(capitals$name)[RAND]
 
-Question<-paste0("What is the capital of ", capitals$name[RAND], "?      Your answer:")
+Question<-paste0("What is the capital of ", Country_Sel, "?      Your answer:")
 
 
 ### Collect the answer
 answer_given<-readline(Question)
-answer_correct<-capitals$capital[RAND] %>% as.character()
+answer_correct<-capitals$capital[capitals$name==Country_Sel] %>% as.character()
 
 
 ### Clean answers to be more comparable
@@ -23,10 +25,10 @@ answer_correct_CLEANED<-GGR_clean_names(answer_correct)
 
 
 ### Provide answers
-if(answer_given_CLEANED == answer_correct_CLEANED){
-  cat(paste0("Congratulations, the answer was indeed ", answer_correct, "\n")) ; Correct="Yes"
+if(answer_given_CLEANED %in% answer_correct_CLEANED){
+  cat(paste0("Congratulations, the answer was indeed ", paste(answer_correct, collapse=" or "), "\n")) ; Correct="Yes"
 } else {
-  cat(paste0("Too bad, the answer was ", answer_correct, "\n"))  ; Correct="No"
+  cat(paste0("Too bad, the answer was ", paste(answer_correct, collapse=" or "), "\n"))  ; Correct="No"
 } 
 
 
