@@ -8,7 +8,7 @@ capitals<-read.csv("Data/Capitals_table.csv")
 capitals$name<-as.factor(capitals$name)
 
 ### Prepare the question
-RAND<-sample(x=(1:nrow(capitals)), size=1) %>% as.numeric()
+RAND<-sample(x=(1:nlevels(capitals$name)), size=1) %>% as.numeric()
 Country_Sel<-levels(capitals$name)[RAND]
 
 Question<-paste0("What is the capital of ", Country_Sel, "?      Your answer:")
@@ -34,7 +34,7 @@ if(answer_given_CLEANED %in% answer_correct_CLEANED){
 
 ### Store answer in the results file
 GGR_Store_results(GAME="Capitals",
-                  QUESTION=capitals$name[RAND],
+                  QUESTION=Country_Sel[1],
                   ANSWER=answer_given,
                   CORRECT=Correct)
 
